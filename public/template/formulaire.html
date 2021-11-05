@@ -1,0 +1,64 @@
+<?php 
+    //var_dump($data['categorie']);
+?>
+<form method="POST" action="index.php?c=Ctrhome&m=saveFormulaire&p=<?php echo($data['id']); ?>">
+<div class="form-group" hidden>
+        <label for="formGroupExampleInput">Id</label>
+        <input name="id" type="text" class="form-control" id="formGroupExampleInput" value="<?php echo($data['id']);?>">
+</div>
+<div class="form-group">
+    <label for="formGroupExampleInput">Nom</label>
+    <input name="nom" type="text" class="form-control" id="formGroupExampleInput" value="<?php echo($data['nom']);?>" required>
+</div>
+
+<!-- Select -->
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Choix categorie</label>
+    <select name="categorie" class="form-control" id="exampleFormControlSelect1">
+            <?php
+                if($data['categorie'] != ''){
+                    foreach ($data[0] as $categorie){
+                        if($data['categorie'] == $categorie){
+                            echo('<option value="'.$categorie.'" selected>'.$categorie.'</option>');
+                        }
+                        else{
+                            echo('<option value="'.$categorie.'">'.$categorie.'</option>');
+                        }
+                    }
+                }
+                else{
+                        /*
+                        foreach ($data[0] as $categorie){
+                            echo('<option value="'.$categorie.'">'.$categorie.'</option>');
+                        }
+                        */
+                        echo('<option value="home">home</option>');
+                        echo('<option value="tv">tv</option>');
+                        echo('<option value="utilitaire">utilitaire</option>');
+                        echo('<option value="favori">favori</option>');
+                    }  
+            ?>
+    </select>
+</div>
+
+<div class="form-group"> 
+    <label for="exampleFormControlTextarea1">Image</label> 
+    <?php 
+        if($data['image']!='')
+        {
+            echo('<img class="imgpetite" src="'.$data['image'].'" width="50" height="50">');
+        }
+        else{
+            echo('<img class="imgpetite" src="https://cdn1.iconfinder.com/data/icons/trycons/32/image-512.png" width="50" height="50">');
+        }
+    ?>
+    <textarea name="image" class="form-control" id="exampleFormControlTextarea1" rows="3" required><?php echo($data['image']);?></textarea>    
+</div>
+<div class="form-group">
+    <label for="formGroupExampleInput2">Lien</label>
+    <input name="lien" type="text" class="form-control" id="formGroupExampleInput2" value="<?php echo($data['lien']);?>" required>
+</div>
+<button type="submit" class="btn btn-primary" >valider</button>
+<a class="btn btn-primary" href="index.php?c=Ctrhome&m=getListe" >Annuler</a>
+</form>

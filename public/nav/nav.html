@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--<a class="navbar-brand" href="#">Navbar</a>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?c=Ctrhome&m=getHome&p=home">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?c=Ctrhome&m=getHome&p=tv">Chaines Tv</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?c=Ctrhome&m=getHome&p=utilitaire">Utilitaires</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?c=Ctrhome&m=getHome&p=favori">Favoris</a>
+            </li>
+            <!--
+            <li class="nav-item active">
+                <a class="nav-link" href="index.php?c=Ctrhome&m=getDarwin">Darwin end Game</a>
+            </li>
+            -->
+            <?php
+            if($_SESSION['connect']){
+                echo('<li class="nav-item active">
+                    <a class="nav-link" href="index.php?c=Ctrhome&m=getListe">Liste</a>
+                </li>');
+                /*
+                echo('<li class="nav-item active">
+                    <a class="nav-link" href="index.php?c=Ctrhome&m=getParmetre">Paramètre</a>
+                </li>');
+                */
+            }  
+        ?>
+        </ul>
+        <?php
+            if(!$_SESSION['connect']){
+                echo('<a class="btn btn-outline-success my-2 my-sm-0" href="index.php?c=Ctrhome&m=getLogIn">Log in</a>');
+            }
+            else{
+                echo('<a class="btn btn-outline-danger my-2 my-sm-0" href="index.php?c=Ctrhome&m=getLogOut">Log out</a>');
+            }
+        ?>
+
+    </div>
+</nav>
