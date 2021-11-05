@@ -1,0 +1,83 @@
+<!-- SelectBox -->
+<form method="POST" action="index.php?c=Ctrhome&m=getTrieList">
+    <select name="categorie" class="custom-select mr-sm-2 col-3">
+        <option value="tout">Tout</option>
+        <?php
+            foreach($selectBox as $select){
+                echo('<option value="'.$select.'">'.$select.'</option>');
+            }
+        ?>
+    </select>
+    <button type="submit" class="btn btn-primary">Trier</button>
+    <libel style="margin-left: 20px;">Ajouter un nouvel élément : </libel>
+    <a class="btn btn-success" href="index.php?c=Ctrhome&m=getFormulaire&p=add" role="button">Ajouter</a>
+</form>
+<br/>
+    
+    <table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Image</th>
+        <th scope="col">Lien</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Actif</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $i = 0; 
+        foreach ($data as $a) {
+            if($a['etat']=='non')
+            {
+                $lien = '<a class="btn btn-danger" href="index.php?c=Ctrhome&m=modifEtat&p='.$a['id'].'">Inactif</a>';
+            }
+            else
+            {
+                $lien = '<a class="btn btn-success" href="index.php?c=Ctrhome&m=modifEtat&p='.$a['id'].'">Actif</a>';
+            }
+            echo('
+            <tr>
+                <th scope="row">'.++$i.'</th>
+                <td>'.$a['id'].'</td>
+                <td>'.$a['categorie'].'</td>
+                <td><img class="imgpetite" src='.$a["image"].' ></td>
+                <td>'.$a['lien'].'</td>
+                <td>'.$a['nom'].'</td>
+                <td>'.$lien.'</td>
+                <td>
+                    <a class="btn btn-warning" href="index.php?c=Ctrhome&m=getFormulaire&p='.$a['id'].'" role="button">Modifier</a>
+                    
+                    <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal'.$a['id'].'">
+                        Supprimer
+                </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal'.$a['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            Voulez-vous Supprimer cette ligne?
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <a class="btn btn-danger" href="index.php?c=Ctrhome&m=supprFormulaire&p='.$a['id'].'" role="button">Supprimer</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>');
+        }
+        ?>
+    </tbody>
+</table>

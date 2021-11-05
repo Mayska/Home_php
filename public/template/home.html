@@ -1,0 +1,14 @@
+<div class="card-group">
+    <?php 
+        foreach($data as $a){
+            echo(
+                '<div>
+                    <a class="img" href="'.$a['lien'].'" target="_blank" >
+                        <img class="imggrande" title="'.$a['nom'].'" src="'.$a['image'].'">
+                    </a>
+                    
+                </div>'
+            );
+        }
+    ?>
+</div>
